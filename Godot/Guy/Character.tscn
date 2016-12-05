@@ -1,0 +1,234 @@
+[gd_scene load_steps=20 format=1]
+
+[ext_resource path="res://Guy/script/PlayerCharacter.gd" type="Script" id=1]
+[ext_resource path="res://Guy/anim/standing/f1.png" type="Texture" id=2]
+[ext_resource path="res://Guy/anim/standing/f2.png" type="Texture" id=3]
+[ext_resource path="res://Guy/anim/walk/f1.png" type="Texture" id=4]
+[ext_resource path="res://Guy/anim/walk/f2.png" type="Texture" id=5]
+[ext_resource path="res://Guy/anim/walk/f3.png" type="Texture" id=6]
+[ext_resource path="res://Guy/anim/chop/f1.png" type="Texture" id=7]
+[ext_resource path="res://Guy/anim/chop/f2.png" type="Texture" id=8]
+[ext_resource path="res://Guy/anim/chop/f3.png" type="Texture" id=9]
+[ext_resource path="res://Guy/sounds/Walk.wav" type="Sample" id=10]
+
+[sub_resource type="RectangleShape2D" id=7]
+
+custom_solver_bias = 0.0
+extents = Vector2( 15, 15 )
+
+[sub_resource type="SpriteFrames" id=1]
+
+animations = [ { "frames":[ ExtResource( 2 ), ExtResource( 3 ), ExtResource( 4 ), ExtResource( 5 ), ExtResource( 6 ), ExtResource( 7 ), ExtResource( 8 ), ExtResource( 9 ) ], "loop":false, "name":"default", "speed":5.0 } ]
+
+[sub_resource type="Animation" id=2]
+
+resource/name = "chop_left"
+length = 0.6
+loop = false
+step = 0.15
+tracks/0/type = "value"
+tracks/0/path = NodePath("AnimatedSprite:flip_h")
+tracks/0/interp = 1
+tracks/0/imported = false
+tracks/0/keys = { "times":FloatArray( 0 ), "transitions":FloatArray( 1 ), "update":1, "values":[ false ] }
+tracks/1/type = "value"
+tracks/1/path = NodePath("AnimatedSprite:frame")
+tracks/1/interp = 1
+tracks/1/imported = false
+tracks/1/keys = { "times":FloatArray( 0, 0.15, 0.3 ), "transitions":FloatArray( 1, 1, 1 ), "update":1, "values":[ 5, 6, 7 ] }
+tracks/2/type = "method"
+tracks/2/path = NodePath("../.")
+tracks/2/interp = 1
+tracks/2/imported = false
+tracks/2/keys = { "times":FloatArray( 0.6 ), "transitions":FloatArray( 1 ), "values":[ { "args":[  ], "method":"stop_chopping" } ] }
+tracks/3/type = "value"
+tracks/3/path = NodePath("../Area2D/CollisionShape2D:transform/pos")
+tracks/3/interp = 1
+tracks/3/imported = false
+tracks/3/keys = { "times":FloatArray( 0 ), "transitions":FloatArray( 1 ), "update":0, "values":[ Vector2( -50, 15 ) ] }
+tracks/4/type = "value"
+tracks/4/path = NodePath("../Area2D:monitorable")
+tracks/4/interp = 1
+tracks/4/imported = false
+tracks/4/keys = { "times":FloatArray( 0, 0.3, 0.6 ), "transitions":FloatArray( 1, 1, 1 ), "update":1, "values":[ false, true, false ] }
+
+[sub_resource type="Animation" id=3]
+
+resource/name = "chop_right"
+length = 0.6
+loop = true
+step = 0.15
+tracks/0/type = "value"
+tracks/0/path = NodePath("AnimatedSprite:flip_h")
+tracks/0/interp = 1
+tracks/0/imported = false
+tracks/0/keys = { "times":FloatArray( 0 ), "transitions":FloatArray( 1 ), "update":1, "values":[ true ] }
+tracks/1/type = "value"
+tracks/1/path = NodePath("AnimatedSprite:frame")
+tracks/1/interp = 1
+tracks/1/imported = false
+tracks/1/keys = { "times":FloatArray( 0, 0.15, 0.3 ), "transitions":FloatArray( 1, 1, 1 ), "update":1, "values":[ 5, 6, 7 ] }
+tracks/2/type = "method"
+tracks/2/path = NodePath("../.")
+tracks/2/interp = 1
+tracks/2/imported = false
+tracks/2/keys = { "times":FloatArray( 0.6 ), "transitions":FloatArray( 1 ), "values":[ { "args":[  ], "method":"stop_chopping" } ] }
+tracks/3/type = "value"
+tracks/3/path = NodePath("../Area2D/CollisionShape2D:transform/pos")
+tracks/3/interp = 1
+tracks/3/imported = false
+tracks/3/keys = { "times":FloatArray( 0 ), "transitions":FloatArray( 1 ), "update":0, "values":[ Vector2( 50, 15 ) ] }
+tracks/4/type = "value"
+tracks/4/path = NodePath("../Area2D:monitorable")
+tracks/4/interp = 1
+tracks/4/imported = false
+tracks/4/keys = { "times":FloatArray( 0, 0.3, 0.6 ), "transitions":FloatArray( 1, 1, 1 ), "update":1, "values":[ false, true, false ] }
+
+[sub_resource type="Animation" id=4]
+
+length = 0.8
+loop = true
+step = 0.4
+tracks/0/type = "value"
+tracks/0/path = NodePath("AnimatedSprite:frame")
+tracks/0/interp = 1
+tracks/0/imported = false
+tracks/0/keys = { "times":FloatArray( 0, 0.4 ), "transitions":FloatArray( 1, 1 ), "update":1, "values":[ 0, 1 ] }
+
+[sub_resource type="Animation" id=5]
+
+length = 0.8
+loop = true
+step = 0.2
+tracks/0/type = "value"
+tracks/0/path = NodePath("AnimatedSprite:frame")
+tracks/0/interp = 1
+tracks/0/imported = false
+tracks/0/keys = { "times":FloatArray( 0, 0.2, 0.4, 0.6 ), "transitions":FloatArray( 1, 1, 1, 1 ), "update":1, "values":[ 2, 3, 4, 3 ] }
+tracks/1/type = "value"
+tracks/1/path = NodePath("AnimatedSprite:flip_h")
+tracks/1/interp = 1
+tracks/1/imported = false
+tracks/1/keys = { "times":FloatArray( 0 ), "transitions":FloatArray( 1 ), "update":1, "values":[ false ] }
+tracks/2/type = "method"
+tracks/2/path = NodePath("..")
+tracks/2/interp = 1
+tracks/2/imported = false
+tracks/2/keys = { "times":FloatArray( 0.2, 0.6 ), "transitions":FloatArray( 1, 1 ), "values":[ { "args":[  ], "method":"play_step_sound" }, { "args":[  ], "method":"play_step_sound" } ] }
+
+[sub_resource type="Animation" id=6]
+
+length = 0.8
+loop = true
+step = 0.2
+tracks/0/type = "value"
+tracks/0/path = NodePath("AnimatedSprite:frame")
+tracks/0/interp = 1
+tracks/0/imported = false
+tracks/0/keys = { "times":FloatArray( 0, 0.2, 0.4, 0.6 ), "transitions":FloatArray( 1, 1, 1, 1 ), "update":1, "values":[ 2, 3, 4, 3 ] }
+tracks/1/type = "value"
+tracks/1/path = NodePath("AnimatedSprite:flip_h")
+tracks/1/interp = 1
+tracks/1/imported = false
+tracks/1/keys = { "times":FloatArray( 0 ), "transitions":FloatArray( 1 ), "update":1, "values":[ true ] }
+tracks/2/type = "method"
+tracks/2/path = NodePath("..")
+tracks/2/interp = 1
+tracks/2/imported = false
+tracks/2/keys = { "times":FloatArray( 0.2, 0.6 ), "transitions":FloatArray( 1, 1 ), "values":[ { "args":[  ], "method":"play_step_sound" }, { "args":[  ], "method":"play_step_sound" } ] }
+
+[sub_resource type="RectangleShape2D" id=8]
+
+custom_solver_bias = 0.0
+extents = Vector2( 30, 15 )
+
+[sub_resource type="SampleLibrary" id=9]
+
+samples/Walk = { "db":0.0, "pitch":1.0, "sample":ExtResource( 10 ) }
+
+[node name="Character" type="Node2D"]
+
+script/script = ExtResource( 1 )
+horizontal_speed = 50
+vertical_speed = 35
+
+[node name="KinematicBody2D" type="KinematicBody2D" parent="."]
+
+transform/pos = Vector2( 0, -30 )
+input/pickable = false
+shapes/0/shape = SubResource( 7 )
+shapes/0/transform = Matrix32( 1, 0, 0, 1, 0, 40 )
+shapes/0/trigger = false
+collision/layers = 1
+collision/mask = 1
+collision/margin = 0.08
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="KinematicBody2D"]
+
+frames = SubResource( 1 )
+animation = "default"
+frame = 3
+flip_h = true
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="KinematicBody2D"]
+
+playback/process_mode = 1
+playback/default_blend_time = 0.0
+root/root = NodePath("..")
+anims/chop_left = SubResource( 2 )
+anims/chop_right = SubResource( 3 )
+anims/standing = SubResource( 4 )
+anims/walk_left = SubResource( 5 )
+anims/walk_right = SubResource( 6 )
+next/chop_right = ""
+next/walk_right = ""
+playback/active = true
+playback/speed = 1.0
+blend_times = [  ]
+autoplay = "standing"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="KinematicBody2D"]
+
+transform/pos = Vector2( 0, 40 )
+shape = SubResource( 7 )
+trigger = false
+_update_shape_index = 0
+
+[node name="Area2D" type="Area2D" parent="."]
+
+transform/pos = Vector2( 0, -30 )
+input/pickable = true
+shapes/0/shape = SubResource( 8 )
+shapes/0/transform = Matrix32( 1, 0, 0, 1, 50, 15 )
+shapes/0/trigger = true
+gravity_vec = Vector2( 0, 1 )
+gravity = 98.0
+linear_damp = 0.1
+angular_damp = 1.0
+monitorable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+
+transform/pos = Vector2( 50, 15 )
+shape = SubResource( 8 )
+trigger = true
+_update_shape_index = 0
+
+[node name="SamplePlayer" type="SamplePlayer" parent="."]
+
+config/polyphony = 1
+config/samples = SubResource( 9 )
+default/volume_db = 0.0
+default/pitch_scale = 1.0
+default/pan = 0.0
+default/depth = 0.0
+default/height = 0.0
+default/filter/type = 0
+default/filter/cutoff = 5000.0
+default/filter/resonance = 1.0
+default/filter/gain = 1.0
+default/reverb_room = 2
+default/reverb_send = 0.0
+default/chorus_send = 0.0
+
+

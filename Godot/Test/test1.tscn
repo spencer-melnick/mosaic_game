@@ -1,0 +1,20 @@
+[gd_scene load_steps=3 format=1]
+
+[ext_resource path="res://Guy/Character.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Scene/Tree/Tree.tscn" type="PackedScene" id=2]
+
+[node name="Game" type="YSort"]
+
+sort/enabled = true
+
+[node name="Character" parent="." instance=ExtResource( 1 )]
+
+transform/pos = Vector2( 86.4879, 268.149 )
+horizontal_speed = 200
+vertical_speed = 150
+
+[node name="Node2D" parent="." instance=ExtResource( 2 )]
+
+transform/pos = Vector2( 338.818, 288.911 )
+
+
