@@ -27,6 +27,14 @@ transform/pos = Vector2( 86.4879, 268.149 )
 
 transform/pos = Vector2( 338.818, 288.911 )
 
+[node name="Node2D 2" parent="Control" instance=ExtResource( 2 )]
+
+transform/pos = Vector2( 432, 229 )
+
+[node name="Node2D 3" parent="Control" instance=ExtResource( 2 )]
+
+transform/pos = Vector2( 517, 321 )
+
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 layer = 1
