@@ -8,7 +8,6 @@ onready var sample_player = get_node("SamplePlayer")
 func _ready():
 	area2d.connect("area_enter", self, "on_hit")
 	set_z(get_global_pos().y)
-	print(get_z())
 
 func on_hit(object):
 	hits += 1
@@ -26,5 +25,8 @@ func on_hit(object):
 		sample_player.play("Destroyed")
 		
 		yield(animation_player, "finished")
+		
 		sample_player.play("Point_Get")
 		get_node("StaticBody2D").queue_free()
+		
+		Globals.set("Points", Globals.get("Points") + 1)

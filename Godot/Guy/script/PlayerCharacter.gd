@@ -1,11 +1,15 @@
 extends Node2D
 
-export var horizontal_speed = 50
-export var vertical_speed = 35
+export var horizontal_speed = 200
+export var vertical_speed = 150
+
+export var camera_top_left_limit = Vector2(-1000, -1000)
+export var camera_bottom_right_limit = Vector2(1000, 1000)
 
 onready var area = get_node("Area2D")
 onready var kinematic_body = get_node("KinematicBody2D")
 onready var animation_player = kinematic_body.get_node("AnimationPlayer")
+onready var camera = kinematic_body.get_node("Camera2D")
 onready var sample_player = get_node("SamplePlayer")
 
 var current_state = "standing"
@@ -18,6 +22,11 @@ var input_ready_states = ["standing", "right", "left"]
 
 func _ready():
 	set_process(true)
+	
+	camera.set_limit(MARGIN_TOP, camera_top_left_limit.y)
+	camera.set_limit(MARGIN_LEFT, camera_top_left_limit.x)
+	camera.set_limit(MARGIN_BOTTOM, camera_bottom_right_limit.y)
+	camera.set_limit(MARGIN_RIGHT, camera_bottom_right_limit.x)
 
 func start_animation():
 	if (current_state == "standing"):
