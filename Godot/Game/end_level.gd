@@ -1,6 +1,7 @@
 extends Control
 
 export (String, FILE) var next_scene
+export (String, FILE) var game_over_scene
 
 var active = false
 
@@ -16,6 +17,9 @@ onready var no_button = gui.get_node("No")
 
 func next_level():
 	gui.hide()
+	
+	if (Globals.get("Points") == 0):
+		next_scene = game_over_scene
 	
 	Globals.set("SpeedScale", Globals.get("Points") / 3.0)
 	Globals.set("Points", 0)
@@ -51,7 +55,8 @@ func _mouse_over(state):
 
 func _area_enter(object):
 	if (!active):
-		active = true
-		
-		gui.show()
-		get_tree().set_pause(true)
+		if (object.is_in_group("Player")):
+			active = true
+			
+			gui.show()
+			get_tree().set_pause(true)

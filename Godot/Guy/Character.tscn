@@ -152,7 +152,7 @@ vertical_speed = 150
 camera_top_left_limit = Vector2( -1000, -1000 )
 camera_bottom_right_limit = Vector2( 1000, 1000 )
 
-[node name="KinematicBody2D" type="KinematicBody2D" parent="."]
+[node name="KinematicBody2D" type="KinematicBody2D" parent="." groups=[ "Player" ]]
 
 transform/pos = Vector2( 0, -30 )
 input/pickable = false

@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=1]
+[gd_scene load_steps=10 format=1]
 
 [ext_resource path="res://Guy/Character.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Scene/Tree/Tree.tscn" type="PackedScene" id=2]
@@ -7,12 +7,22 @@
 [ext_resource path="res://Game/score_display.gd" type="Script" id=5]
 [ext_resource path="res://Scene/Logs/LogPile.png" type="Texture" id=6]
 
-[sub_resource type="DynamicFont" id=2]
+[sub_resource type="DynamicFont" id=1]
 
 font/size = 24
 font/use_mipmaps = false
 font/use_filter = false
 font/font = ExtResource( 4 )
+
+[sub_resource type="RectangleShape2D" id=2]
+
+custom_solver_bias = 0.0
+extents = Vector2( 2000, 10 )
+
+[sub_resource type="RectangleShape2D" id=3]
+
+custom_solver_bias = 0.0
+extents = Vector2( 10, 600 )
 
 [node name="Game" type="Control"]
 
@@ -31,7 +41,9 @@ sort/enabled = true
 
 [node name="Character" parent="Control" instance=ExtResource( 1 )]
 
-transform/pos = Vector2( 86.4879, 268.149 )
+transform/pos = Vector2( 621.488, 432.149 )
+camera_top_left_limit = Vector2( -1600, -100 )
+camera_bottom_right_limit = Vector2( 800, 700 )
 
 [node name="Node2D" parent="Control" instance=ExtResource( 2 )]
 
@@ -47,11 +59,12 @@ transform/pos = Vector2( 517, 321 )
 
 [node name="EndLevelBound" parent="Control" instance=ExtResource( 3 )]
 
-margin/left = 612.0
+margin/left = 800.0
 margin/top = -458.0
-margin/right = 652.0
+margin/right = 840.0
 margin/bottom = -418.0
 next_scene = "res://Test/test1.tscn"
+game_over_scene = "res://Game/GameOverScreen.tscn"
 
 [node name="LumberTree" parent="Control" instance=ExtResource( 2 )]
 
@@ -82,7 +95,7 @@ margin/left = 168.0
 margin/top = 27.0
 margin/right = 401.0
 margin/bottom = 60.0
-custom_fonts/font = SubResource( 2 )
+custom_fonts/font = SubResource( 1 )
 text = "x 0"
 percent_visible = 1.0
 lines_skipped = 0
@@ -93,5 +106,55 @@ script/script = ExtResource( 5 )
 
 transform/pos = Vector2( 98.615, 31.0249 )
 texture = ExtResource( 6 )
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+
+input/pickable = false
+shapes/0/shape = SubResource( 2 )
+shapes/0/transform = Matrix32( 1, 0, 0, 1, 0, -70 )
+shapes/0/trigger = false
+shapes/1/shape = SubResource( 2 )
+shapes/1/transform = Matrix32( 1, 0, 0, 1, 0, 700 )
+shapes/1/trigger = false
+shapes/2/shape = SubResource( 3 )
+shapes/2/transform = Matrix32( 1, 0, 0, 1, 820, 250 )
+shapes/2/trigger = false
+shapes/3/shape = SubResource( 3 )
+shapes/3/transform = Matrix32( 1, 0, 0, 1, -1600, 250 )
+shapes/3/trigger = false
+collision/layers = 1
+collision/mask = 1
+constant_linear_velocity = Vector2( 0, 0 )
+constant_angular_velocity = 0.0
+friction = 1.0
+bounce = 0.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+
+transform/pos = Vector2( 0, -70 )
+shape = SubResource( 2 )
+trigger = false
+_update_shape_index = 0
+
+[node name="CollisionShape2D1" type="CollisionShape2D" parent="StaticBody2D"]
+
+transform/pos = Vector2( 0, 700 )
+shape = SubResource( 2 )
+trigger = false
+_update_shape_index = 1
+
+[node name="CollisionShape2D 2" type="CollisionShape2D" parent="StaticBody2D"]
+
+transform/pos = Vector2( 820, 250 )
+shape = SubResource( 3 )
+trigger = false
+_update_shape_index = 2
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="StaticBody2D"]
+
+transform/pos = Vector2( -1600, 250 )
+shape = SubResource( 3 )
+trigger = false
+_update_shape_index = 3
 
 

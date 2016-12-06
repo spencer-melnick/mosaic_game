@@ -67,6 +67,7 @@ margin/right = 40.0
 margin/bottom = 40.0
 script/script = ExtResource( 1 )
 next_scene = null
+game_over_scene = null
 
 [node name="Area2D" type="Area2D" parent="."]
 
@@ -88,7 +89,7 @@ _update_shape_index = 0
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
-layer = 1
+layer = 2
 offset = Vector2( 0, 0 )
 rotation = 0.0
 scale = Vector2( 1, 1 )
@@ -107,7 +108,7 @@ margin/bottom = 340.0
 
 [node name="Sprite" type="Sprite" parent="CanvasLayer/Control"]
 
-transform/scale = Vector2( 3, 2 )
+transform/scale = Vector2( 4, 3 )
 texture = ExtResource( 2 )
 
 [node name="Yes" type="Button" parent="CanvasLayer/Control"]
