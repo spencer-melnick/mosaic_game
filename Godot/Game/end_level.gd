@@ -15,6 +15,24 @@ onready var no_select = gui.get_node("NoSelect")
 onready var yes_button = gui.get_node("Yes")
 onready var no_button = gui.get_node("No")
 
+var state = 0
+
+func _input(event):
+	if (active):
+		if (event.is_action_pressed("move_right") || event.is_action_pressed("move_left")):
+			if (state == 0):
+				state = 1
+			elif (state == 1):
+				state = 0
+				
+			update_buttons()
+		
+		if (event.is_action_pressed("action")):
+			if (state == 1):
+				next_level()
+			elif (state == 0):
+				close_gui()
+
 func next_level():
 	gui.hide()
 	
@@ -36,6 +54,8 @@ func close_gui():
 	gui.hide()
 
 func _ready():
+	set_process_input(true)
+	
 	area.connect("body_enter", self, "_area_enter")
 	
 	yes_button.connect("mouse_enter", self, "_mouse_over", [1])
@@ -44,7 +64,7 @@ func _ready():
 	no_button.connect("pressed", self, "close_gui")
 	yes_button.connect("pressed", self, "next_level")
 
-func _mouse_over(state):
+func update_buttons():
 	if (state == 0):
 		yes_select.hide()
 		no_select.show()
@@ -52,6 +72,10 @@ func _mouse_over(state):
 	if (state == 1):
 		yes_select.show()
 		no_select.hide()
+
+func _mouse_over(value):
+	state = value
+	update_buttons()
 
 func _area_enter(object):
 	if (!active):

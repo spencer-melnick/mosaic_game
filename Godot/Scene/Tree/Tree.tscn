@@ -59,6 +59,7 @@ extents = Vector2( 30, 30 )
 [node name="LumberTree" type="Node2D"]
 
 script/script = ExtResource( 1 )
+hittable = true
 
 [node name="SamplePlayer" type="SamplePlayer" parent="."]
 
