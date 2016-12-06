@@ -1,19 +1,27 @@
-[gd_scene load_steps=4 format=1]
+[gd_scene load_steps=6 format=1]
 
 [ext_resource path="res://Game/next_scene.gd" type="Script" id=1]
-[ext_resource path="res://Game/screen_fade.png" type="Texture" id=2]
+[ext_resource path="res://Game/Fonts/8bitOperatorPlus-Bold.ttf" type="DynamicFontData" id=2]
+[ext_resource path="res://Game/screen_fade.png" type="Texture" id=3]
 
 [sub_resource type="Animation" id=1]
 
 resource/name = "fade_out"
-length = 0.5
+length = 0.3
 loop = false
 step = 0.1
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:visibility/opacity")
 tracks/0/interp = 1
 tracks/0/imported = false
-tracks/0/keys = { "times":FloatArray( 0, 0.5 ), "transitions":FloatArray( 1, 1 ), "update":0, "values":[ 0.0, 1.0 ] }
+tracks/0/keys = { "times":FloatArray( 0, 0.3 ), "transitions":FloatArray( 1, 1 ), "update":0, "values":[ 0.0, 1.0 ] }
+
+[sub_resource type="DynamicFont" id=2]
+
+font/size = 24
+font/use_mipmaps = false
+font/use_filter = false
+font/font = ExtResource( 2 )
 
 [node name="TitleScreen" type="Control"]
 
@@ -49,6 +57,7 @@ margin/left = 421.0
 margin/top = 213.0
 margin/right = 621.0
 margin/bottom = 233.0
+custom_fonts/font = SubResource( 2 )
 text = "Title text here"
 percent_visible = 1.0
 lines_skipped = 0
@@ -57,7 +66,8 @@ max_lines_visible = -1
 [node name="Sprite" type="Sprite" parent="."]
 
 visibility/opacity = 0.0
-texture = ExtResource( 2 )
+transform/pos = Vector2( 0, -0.902496 )
+texture = ExtResource( 3 )
 centered = false
 
 

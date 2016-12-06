@@ -4,4 +4,4 @@ func _ready():
 	set_process(true)
 
 func _process(delta):
-	set_text("Trees chopped: " + String(Globals.get("Points")))
+	set_text("x " + String(Globals.get("Points")))

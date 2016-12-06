@@ -19,6 +19,7 @@ var horizontal_input = 0
 var vertical_input = 0
 
 var input_ready_states = ["standing", "right", "left"]
+var speed_scale = 1
 
 func _ready():
 	set_process(true)
@@ -27,6 +28,8 @@ func _ready():
 	camera.set_limit(MARGIN_LEFT, camera_top_left_limit.x)
 	camera.set_limit(MARGIN_BOTTOM, camera_bottom_right_limit.y)
 	camera.set_limit(MARGIN_RIGHT, camera_bottom_right_limit.x)
+	
+	speed_scale = Globals.get("SpeedScale")
 
 func start_animation():
 	if (current_state == "standing"):
@@ -80,7 +83,7 @@ func process_input():
 func _process(delta):
 	process_input()
 	
-	kinematic_body.move(Vector2(horizontal_speed * delta * horizontal_input, vertical_speed * delta * vertical_input))
+	kinematic_body.move(Vector2(horizontal_speed * speed_scale * delta * horizontal_input, vertical_speed * speed_scale * delta * vertical_input))
 	area.set_pos(kinematic_body.get_pos())
 	
 	set_z(kinematic_body.get_global_pos().y)
