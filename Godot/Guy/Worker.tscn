@@ -1,10 +1,10 @@
 [gd_scene load_steps=15 format=1]
 
 [ext_resource path="res://Guy/Worker.gd" type="Script" id=1]
-[ext_resource path="res://Guy/anim/hit/f1.png" type="Texture" id=2]
-[ext_resource path="res://Guy/anim/chop/f1.png" type="Texture" id=3]
-[ext_resource path="res://Guy/anim/chop/f2.png" type="Texture" id=4]
-[ext_resource path="res://Guy/anim/chop/f3.png" type="Texture" id=5]
+[ext_resource path="res://Guy/anim/hit/f2.png" type="Texture" id=2]
+[ext_resource path="res://Guy/anim/worker_chop/f1.png" type="Texture" id=3]
+[ext_resource path="res://Guy/anim/worker_chop/f2.png" type="Texture" id=4]
+[ext_resource path="res://Guy/anim/worker_chop/f3.png" type="Texture" id=5]
 [ext_resource path="res://Scene/Tree/sounds/Chop.wav" type="Sample" id=6]
 [ext_resource path="res://Guy/sounds/Hurt.wav" type="Sample" id=7]
 

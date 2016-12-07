@@ -77,6 +77,7 @@ func close_gui():
 	gui.hide()
 
 func _ready():
+	update_buttons()
 	set_process_input(true)
 	
 	area.connect("body_enter", self, "_area_enter")
