@@ -112,5 +112,6 @@ func play_step_sound():
 	sample_player.play("Walk")
 
 func _on_hit():
-	sample_player.play("Hit")
-	current_state = "hit"
+	if (current_state != "hit"):
+		sample_player.play("Hurt")
+		current_state = "hit"
