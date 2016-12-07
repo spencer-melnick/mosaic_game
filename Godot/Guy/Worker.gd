@@ -1,13 +1,28 @@
 extends Node2D
 
 export (NodePath) var tree_target_path
+
 export (NodePath) var invasion_target_path
 export (NodePath) var invasion_tree_1_path
+
+export (NodePath) var invasion_target_2_path
+export (NodePath) var invasion_tree_2_path
+
+export (NodePath) var invasion_target_3_path
+export (NodePath) var invasion_tree_3_path
+
 export (String, FILE) var hostile_worker_path
 
 onready var tree_target = get_node(tree_target_path)
+
 onready var invasion_target = get_node(invasion_target_path)
 onready var invasion_tree_1 = get_node(invasion_tree_1_path)
+
+onready var invasion_target_2 = get_node(invasion_target_2_path)
+onready var invasion_tree_2 = get_node(invasion_tree_2_path)
+
+onready var invasion_target_3 = get_node(invasion_target_3_path)
+onready var invasion_tree_3 = get_node(invasion_tree_3_path)
 
 var damage = 0
 
@@ -18,9 +33,23 @@ onready var area = get_node("Area2D")
 func _ready():
 	#set_process(true)
 	if (Globals.get("InvasionTimer") == 0):
+		Globals.set("InvasionCounter", Globals.get("InvasionCounter") + 1)
+		
+		if (Globals.get("InvasionCounter") <= 2):
 			set_global_pos(invasion_target.get_global_pos())
 			set_scale(Vector2(-1, 1))
 			tree_target = invasion_tree_1
+		elif (Globals.get("InvasionCounter") <= 3):
+			set_global_pos(invasion_target_2.get_global_pos())
+			set_scale(Vector2(-1, 1))
+			tree_target = invasion_tree_2
+			invasion_tree_1.set_hittable(false)
+		else:
+			set_global_pos(invasion_target_3.get_global_pos())
+			set_scale(Vector2(-1, 1))
+			invasion_tree_1.set_hittable(false)
+			invasion_tree_2.set_hittable(false)
+			tree_target = invasion_tree_3
 	
 	if (Globals.get("RetributionTimer") < 0):
 		area.connect("area_enter", self, "_on_hit")

@@ -13,6 +13,7 @@ func setup_globals():
 	Globals.set("SpeedScale", 1)
 	Globals.set("InvasionTimer", 2)
 	Globals.set("RetributionTimer", -1)
+	Globals.set("InvasionCounter", 0)
 
 func goto_scene(path):
 

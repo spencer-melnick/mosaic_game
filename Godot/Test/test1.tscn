@@ -42,7 +42,7 @@ sort/enabled = true
 
 [node name="Character" parent="Control" instance=ExtResource( 1 )]
 
-transform/pos = Vector2( 621.488, 432.149 )
+transform/pos = Vector2( 733.99, 366.836 )
 camera_top_left_limit = Vector2( -1600, -100 )
 camera_bottom_right_limit = Vector2( 800, 700 )
 scene_end_path = NodePath("../EndLevelBound")
@@ -57,7 +57,7 @@ transform/pos = Vector2( 432, 229 )
 
 [node name="Node2D 3" parent="Control" instance=ExtResource( 2 )]
 
-transform/pos = Vector2( 517, 321 )
+transform/pos = Vector2( 565.87, 326.702 )
 
 [node name="EndLevelBound" parent="Control" instance=ExtResource( 3 )]
 
@@ -84,12 +84,24 @@ transform/pos = Vector2( -698.155, 371.549 )
 
 transform/pos = Vector2( 230, 280 )
 
+[node name="InvasionTarget1" type="Node2D" parent="Control"]
+
+transform/pos = Vector2( 309.61, 187.785 )
+
+[node name="InvasionTarget2" type="Node2D" parent="Control"]
+
+transform/pos = Vector2( 474.141, 296.114 )
+
 [node name="Node2D 4" parent="Control" instance=ExtResource( 4 )]
 
 transform/pos = Vector2( -423, 309 )
 tree_target_path = NodePath("../LumberTree 2")
 invasion_target_path = NodePath("../InvasionTarget")
 invasion_tree_1_path = NodePath("../Node2D")
+invasion_target_2_path = NodePath("../InvasionTarget1")
+invasion_tree_2_path = NodePath("../Node2D 2")
+invasion_target_3_path = NodePath("../InvasionTarget2")
+invasion_tree_3_path = NodePath("../Node2D 3")
 hostile_worker_path = "res://Guy/HostileWorker.tscn"
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
