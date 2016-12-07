@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=1]
+[gd_scene load_steps=22 format=1]
 
 [ext_resource path="res://Guy/script/PlayerCharacter.gd" type="Script" id=1]
 [ext_resource path="res://Guy/anim/standing/f1.png" type="Texture" id=2]
@@ -9,7 +9,8 @@
 [ext_resource path="res://Guy/anim/chop/f1.png" type="Texture" id=7]
 [ext_resource path="res://Guy/anim/chop/f2.png" type="Texture" id=8]
 [ext_resource path="res://Guy/anim/chop/f3.png" type="Texture" id=9]
-[ext_resource path="res://Guy/sounds/Walk.wav" type="Sample" id=10]
+[ext_resource path="res://Guy/anim/hit/f1.png" type="Texture" id=10]
+[ext_resource path="res://Guy/sounds/Walk.wav" type="Sample" id=11]
 
 [sub_resource type="RectangleShape2D" id=1]
 
@@ -18,7 +19,7 @@ extents = Vector2( 15, 15 )
 
 [sub_resource type="SpriteFrames" id=2]
 
-animations = [ { "frames":[ ExtResource( 2 ), ExtResource( 3 ), ExtResource( 4 ), ExtResource( 5 ), ExtResource( 6 ), ExtResource( 7 ), ExtResource( 8 ), ExtResource( 9 ) ], "loop":false, "name":"default", "speed":5.0 } ]
+animations = [ { "frames":[ ExtResource( 2 ), ExtResource( 3 ), ExtResource( 4 ), ExtResource( 5 ), ExtResource( 6 ), ExtResource( 7 ), ExtResource( 8 ), ExtResource( 9 ), ExtResource( 10 ) ], "loop":false, "name":"default", "speed":5.0 } ]
 
 [sub_resource type="Animation" id=3]
 
@@ -82,6 +83,28 @@ tracks/4/interp = 1
 tracks/4/imported = false
 tracks/4/keys = { "times":FloatArray( 0, 0.3, 0.6 ), "transitions":FloatArray( 1, 1, 1 ), "update":1, "values":[ false, true, false ] }
 
+[sub_resource type="Animation" id=11]
+
+resource/name = "hit"
+length = 1.0
+loop = true
+step = 0.1
+tracks/0/type = "value"
+tracks/0/path = NodePath("AnimatedSprite:frame")
+tracks/0/interp = 1
+tracks/0/imported = false
+tracks/0/keys = { "times":FloatArray( 0 ), "transitions":FloatArray( 1 ), "update":1, "values":[ 8 ] }
+tracks/1/type = "value"
+tracks/1/path = NodePath("AnimatedSprite:transform/pos")
+tracks/1/interp = 0
+tracks/1/imported = false
+tracks/1/keys = { "times":FloatArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6 ), "transitions":FloatArray( 1, 1, 1, 1, 1, 1, 1 ), "update":0, "values":[ Vector2( 0, 0 ), Vector2( -5, 0 ), Vector2( 0, 0 ), Vector2( 5, 0 ), Vector2( 0, 0 ), Vector2( -5, 0 ), Vector2( 0, 0 ) ] }
+tracks/2/type = "method"
+tracks/2/path = NodePath("..")
+tracks/2/interp = 1
+tracks/2/imported = false
+tracks/2/keys = { "times":FloatArray( 0.6 ), "transitions":FloatArray( 1 ), "values":[ { "args":[  ], "method":"stop_hit" } ] }
+
 [sub_resource type="Animation" id=5]
 
 length = 0.8
@@ -142,7 +165,7 @@ extents = Vector2( 30, 15 )
 
 [sub_resource type="SampleLibrary" id=9]
 
-samples/Walk = { "db":0.0, "pitch":1.0, "sample":ExtResource( 10 ) }
+samples/Walk = { "db":0.0, "pitch":1.0, "sample":ExtResource( 11 ) }
 
 [node name="Character" type="Node2D"]
 
@@ -151,6 +174,7 @@ horizontal_speed = 200
 vertical_speed = 150
 camera_top_left_limit = Vector2( -1000, -1000 )
 camera_bottom_right_limit = Vector2( 1000, 1000 )
+scene_end_path = null
 
 [node name="KinematicBody2D" type="KinematicBody2D" parent="." groups=[ "Player" ]]
 
@@ -167,7 +191,7 @@ collision/margin = 0.08
 
 frames = SubResource( 2 )
 animation = "default"
-flip_h = true
+frame = 8
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="KinematicBody2D"]
 
@@ -176,6 +200,7 @@ playback/default_blend_time = 0.0
 root/root = NodePath("..")
 anims/chop_left = SubResource( 3 )
 anims/chop_right = SubResource( 4 )
+anims/hit = SubResource( 11 )
 anims/standing = SubResource( 5 )
 anims/walk_left = SubResource( 6 )
 anims/walk_right = SubResource( 7 )
@@ -212,12 +237,12 @@ drag_margin/top = 0.2
 drag_margin/right = 0.2
 drag_margin/bottom = 0.2
 
-[node name="Area2D" type="Area2D" parent="."]
+[node name="Area2D" type="Area2D" parent="." groups=[ "PlayerChop" ]]
 
 transform/pos = Vector2( 0, -30 )
 input/pickable = true
 shapes/0/shape = SubResource( 8 )
-shapes/0/transform = Matrix32( 1, 0, 0, 1, 50, 15 )
+shapes/0/transform = Matrix32( 1, 0, 0, 1, -50, 15 )
 shapes/0/trigger = true
 gravity_vec = Vector2( 0, 1 )
 gravity = 98.0
@@ -227,7 +252,7 @@ monitorable = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 
-transform/pos = Vector2( 50, 15 )
+transform/pos = Vector2( -50, 15 )
 shape = SubResource( 8 )
 trigger = true
 _update_shape_index = 0

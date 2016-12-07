@@ -39,7 +39,7 @@ tracks/3/interp = 1
 tracks/3/imported = false
 tracks/3/keys = { "times":FloatArray( 0 ), "transitions":FloatArray( 1 ), "update":1, "values":[ true ] }
 
-[sub_resource type="Animation" id=4]
+[sub_resource type="Animation" id=3]
 
 resource/name = "hit_1"
 length = 0.4
@@ -61,7 +61,7 @@ tracks/2/interp = 1
 tracks/2/imported = false
 tracks/2/keys = { "times":FloatArray( 0 ), "transitions":FloatArray( 1 ), "update":1, "values":[ true ] }
 
-[sub_resource type="Animation" id=6]
+[sub_resource type="Animation" id=4]
 
 resource/name = "hit_2"
 length = 1.2
@@ -78,12 +78,12 @@ tracks/1/interp = 1
 tracks/1/imported = false
 tracks/1/keys = { "times":FloatArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7 ), "transitions":FloatArray( 1, 1, 1, 1, 1, 1, 1, 1 ), "update":1, "values":[ true, false, true, false, true, false, true, false ] }
 
-[sub_resource type="SampleLibrary" id=3]
+[sub_resource type="SampleLibrary" id=5]
 
 samples/Chop = { "db":0.0, "pitch":1.0, "sample":ExtResource( 6 ) }
 samples/Hurt = { "db":0.0, "pitch":1.0, "sample":ExtResource( 7 ) }
 
-[sub_resource type="RectangleShape2D" id=5]
+[sub_resource type="RectangleShape2D" id=6]
 
 custom_solver_bias = 0.0
 extents = Vector2( 25, 60 )
@@ -97,6 +97,9 @@ extents = Vector2( 25, 600 )
 
 script/script = ExtResource( 1 )
 tree_target_path = null
+invasion_target_path = null
+invasion_tree_1_path = null
+hostile_worker_path = null
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 
@@ -109,8 +112,8 @@ playback/process_mode = 1
 playback/default_blend_time = 0.0
 root/root = NodePath("..")
 anims/chopping = SubResource( 2 )
-anims/hit_1 = SubResource( 4 )
-anims/hit_2 = SubResource( 6 )
+anims/hit_1 = SubResource( 3 )
+anims/hit_2 = SubResource( 4 )
 next/hit_2 = ""
 playback/active = true
 playback/speed = 1.0
@@ -125,13 +128,13 @@ params/attenuation/min_distance = 1.0
 params/attenuation/max_distance = 2048.0
 params/attenuation/distance_exp = 2.0
 config/polyphony = 1
-config/samples = SubResource( 3 )
+config/samples = SubResource( 5 )
 config/pitch_random = 0.0
 
 [node name="Area2D" type="Area2D" parent="."]
 
 input/pickable = true
-shapes/0/shape = SubResource( 5 )
+shapes/0/shape = SubResource( 6 )
 shapes/0/transform = Matrix32( 1, 0, 0, 1, 0, 0 )
 shapes/0/trigger = false
 gravity_vec = Vector2( 0, 1 )
@@ -141,7 +144,7 @@ angular_damp = 1.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 
-shape = SubResource( 5 )
+shape = SubResource( 6 )
 trigger = false
 _update_shape_index = 0
 

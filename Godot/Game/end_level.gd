@@ -33,14 +33,37 @@ func _input(event):
 			elif (state == 0):
 				close_gui()
 
+func next_level_processing():
+	var invasion_timer = Globals.get("InvasionTimer")
+	var retribution_timer = Globals.get("RetributionTimer")
+	var points = Globals.get("Points")
+	
+	if (points == 0):
+		next_scene = game_over_scene
+	
+	Globals.set("SpeedScale", points / 3.0)
+	Globals.set("Points", 0)
+	
+	if (invasion_timer > 0):
+		invasion_timer -= 1
+		Globals.set("InvasionTimer", invasion_timer)
+	
+	if (retribution_timer > 0):
+		retribution_timer -= 1
+		Globals.set("RetributionTimer", retribution_timer)
+	
+	print(String(invasion_timer) + " days to invasion")
+	print(String(retribution_timer) + " day to retribution")
+
+func game_over():
+	next_scene = game_over_scene
+	next_level()
+	get_tree().set_pause(true)
+
 func next_level():
 	gui.hide()
 	
-	if (Globals.get("Points") == 0):
-		next_scene = game_over_scene
-	
-	Globals.set("SpeedScale", Globals.get("Points") / 3.0)
-	Globals.set("Points", 0)
+	next_level_processing()
 	
 	animation_player.play("fade_out")
 	yield(animation_player, "finished")

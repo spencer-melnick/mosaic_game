@@ -1,6 +1,6 @@
 [gd_scene load_steps=6 format=1]
 
-[ext_resource path="res://Game/next_scene.gd" type="Script" id=1]
+[ext_resource path="res://Game/game_reset_scene.gd" type="Script" id=1]
 [ext_resource path="res://Game/Fonts/8bitOperatorPlus-Bold.ttf" type="DynamicFontData" id=2]
 [ext_resource path="res://Game/screen_fade.png" type="Texture" id=3]
 

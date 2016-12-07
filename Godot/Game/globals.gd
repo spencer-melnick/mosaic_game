@@ -6,8 +6,13 @@ func _ready():
 	var root = get_tree().get_root()
 	current_scene = root.get_child( root.get_child_count() -1 )
 	
+	setup_globals()
+
+func setup_globals():
 	Globals.set("Points", 0)
 	Globals.set("SpeedScale", 1)
+	Globals.set("InvasionTimer", 2)
+	Globals.set("RetributionTimer", -1)
 
 func goto_scene(path):
 

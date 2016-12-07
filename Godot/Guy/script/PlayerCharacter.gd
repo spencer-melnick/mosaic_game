@@ -6,11 +6,16 @@ export var vertical_speed = 150
 export var camera_top_left_limit = Vector2(-1000, -1000)
 export var camera_bottom_right_limit = Vector2(1000, 1000)
 
+export (NodePath) var scene_end_path
+
 onready var area = get_node("Area2D")
 onready var kinematic_body = get_node("KinematicBody2D")
 onready var animation_player = kinematic_body.get_node("AnimationPlayer")
 onready var camera = kinematic_body.get_node("Camera2D")
 onready var sample_player = get_node("SamplePlayer")
+onready var scene_end = get_node(scene_end_path)
+
+var health = 2
 
 var current_state = "standing"
 var last_state = "standing"
@@ -42,6 +47,8 @@ func start_animation():
 		animation_player.play("chop_left")
 	elif (current_state == "chopping_right"):
 		animation_player.play("chop_right")
+	elif (current_state == "hit"):
+		animation_player.play("hit")
 
 
 func process_input():
@@ -92,5 +99,17 @@ func stop_chopping():
 	if (current_state == "chopping_left" || current_state == "chopping_right"):
 		current_state = "standing"
 
+func stop_hit():
+	health -= 1
+	
+	if (health == 0):
+		scene_end.game_over()
+	
+	if (current_state == "hit"):
+		current_state = "standing"
+
 func play_step_sound():
 	sample_player.play("Walk")
+
+func _on_hit():
+	current_state = "hit"
